@@ -1,0 +1,11 @@
+[Unit]
+Description=Fresence agent
+After=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/fresence run
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

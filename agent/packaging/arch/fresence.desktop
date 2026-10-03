@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Fresence
+Exec=/usr/bin/fresence-desktop %u
+Icon=fresence
+Categories=Network;
+MimeType=x-scheme-handler/fresence;
+StartupWMClass=fresence
