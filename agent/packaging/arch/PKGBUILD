@@ -1,6 +1,6 @@
 pkgbase=fresence-bin
 pkgname=(fresence-bin fresence-desktop-bin)
-pkgver=0.9.0
+pkgver=0.10.0
 pkgrel=1
 pkgdesc="Presence for a few friends: who is online, what is open, what is playing"
 arch=(x86_64 aarch64)
@@ -9,9 +9,9 @@ license=(LicenseRef-Fresence)
 options=(!strip !debug)
 _release="$url/releases/download/v$pkgver"
 
-_sha_agent_amd64=6d39cb33cb490d8687ecda3d42f048a2866e28aec10744fff8668d933799e9c8
-_sha_agent_arm64=6b41682129a2ed5102593c3c02efaa0336c60e5f22364b6b7ef66cdc401e206a
-_sha_desktop_amd64=7c7b470fe914aadd966fa8eb6947a406990fc1b420b7c40574b4e14c938d2f54
+_sha_agent_amd64=2260c4d345b626f504cb43653103f3d75d1b3d5507960a571832fc4bd705f4cd
+_sha_agent_arm64=c576f9ef23e6726ec7af673d7d4baad90928d60855989b91aa6e92ce1c23cda3
+_sha_desktop_amd64=33d41a0e6996bab471ebdbea3ea327d71f50407c83fd1c124ae603e6102d515b
 _sha_notices=31abac77e93a96af84b08f0e5db70a9792ec0ded0e20397dcd18dba1870a3713
 _sha_license=16ce71ca3247c82fbbe61448526f55e6f67f95464ca2190ca69da4e157dd7b0b
 _sha_service=2d9fa35c6284f5ea41ad5a36258c0148952b86f301b5e49dfd8e961ba3616287
