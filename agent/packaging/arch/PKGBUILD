@@ -1,57 +1,35 @@
-pkgbase=fresence-bin
-pkgname=(fresence-bin fresence-desktop-bin)
-pkgver=0.10.0
+pkgname=fresence-bin
+pkgver=0.12.0
 pkgrel=1
 pkgdesc="Presence for a few friends: who is online, what is open, what is playing"
-arch=(x86_64 aarch64)
+arch=(x86_64)
 url="https://github.com/Berupor/Fresence"
 license=(LicenseRef-Fresence)
+depends=(libx11 libxext libxi libxrender libxtst libglvnd fontconfig freetype2 ttf-font alsa-lib xdg-utils)
+optdepends=('gnome-keyring: Secret Service for the account key'
+            'kwallet: Secret Service for the account key')
+provides=(fresence-desktop-bin)
+conflicts=(fresence-desktop-bin)
+replaces=(fresence-desktop-bin)
+install=fresence-bin.install
 options=(!strip !debug)
 _release="$url/releases/download/v$pkgver"
 
-_sha_agent_amd64=2260c4d345b626f504cb43653103f3d75d1b3d5507960a571832fc4bd705f4cd
-_sha_agent_arm64=c576f9ef23e6726ec7af673d7d4baad90928d60855989b91aa6e92ce1c23cda3
-_sha_desktop_amd64=33d41a0e6996bab471ebdbea3ea327d71f50407c83fd1c124ae603e6102d515b
-_sha_notices=31abac77e93a96af84b08f0e5db70a9792ec0ded0e20397dcd18dba1870a3713
+_sha_desktop_amd64=01442bcac2be257939a35a39500ce37ae2c64346a9b5d646c8656e5d07c68657
+_sha_notices=5a5166a8c800aa6c888cc4c0d8e23aa9a86712d8637896b1426caeb4a17f6f0b
 _sha_license=16ce71ca3247c82fbbe61448526f55e6f67f95464ca2190ca69da4e157dd7b0b
-_sha_service=2d9fa35c6284f5ea41ad5a36258c0148952b86f301b5e49dfd8e961ba3616287
 _sha_desktop_entry=5e74d9a3b7bb0a69ef2e16afa3f3c9155d304bfef1fb33edc9ced2e68d154c9d
 
 source=(
+    "fresence-desktop-$pkgver-linux-amd64.tar.gz::$_release/fresence-desktop-linux-amd64.tar.gz"
     "fresence-third-party-notices-$pkgver.txt::$_release/fresence-third-party-notices.txt"
     LICENSE
-    fresence.service
     fresence.desktop
 )
-source_x86_64=(
-    "fresence-$pkgver-linux-amd64::$_release/fresence-linux-amd64"
-    "fresence-desktop-$pkgver-linux-amd64.tar.gz::$_release/fresence-desktop-linux-amd64.tar.gz"
-)
-source_aarch64=("fresence-$pkgver-linux-arm64::$_release/fresence-linux-arm64")
 noextract=("fresence-desktop-$pkgver-linux-amd64.tar.gz")
-sha256sums=("$_sha_notices" "$_sha_license" "$_sha_service" "$_sha_desktop_entry")
-sha256sums_x86_64=("$_sha_agent_amd64" "$_sha_desktop_amd64")
-sha256sums_aarch64=("$_sha_agent_arm64")
+sha256sums=("$_sha_desktop_amd64" "$_sha_notices" "$_sha_license" "$_sha_desktop_entry")
 
-package_fresence-bin() {
-    depends=(systemd)
-    optdepends=('gnome-keyring: Secret Service for the agent key'
-                'kwallet: Secret Service for the agent key')
-    install=fresence-bin.install
-
-    local goarch=amd64
-    [[ $CARCH == aarch64 ]] && goarch=arm64
-    install -Dm755 "fresence-$pkgver-linux-$goarch" "$pkgdir/usr/bin/fresence"
-    install -Dm644 fresence.service "$pkgdir/usr/lib/systemd/user/fresence.service"
-    install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
-    install -Dm644 "fresence-third-party-notices-$pkgver.txt" "$pkgdir/usr/share/licenses/$pkgname/third-party-notices.txt"
-}
-
-package_fresence-desktop-bin() {
-    pkgdesc="Fresence desktop app"
-    arch=(x86_64)
-    depends=(fresence-bin libx11 libxext libxi libxrender libxtst libglvnd fontconfig freetype2 ttf-font alsa-lib xdg-utils)
-
+package() {
     install -d "$pkgdir/opt"
     bsdtar -xf "fresence-desktop-$pkgver-linux-amd64.tar.gz" -C "$pkgdir/opt" --no-same-owner
     mv "$pkgdir/opt/Fresence" "$pkgdir/opt/fresence"
@@ -62,4 +40,5 @@ package_fresence-desktop-bin() {
     install -Dm644 "$pkgdir/opt/fresence/lib/Fresence.png" "$pkgdir/usr/share/icons/hicolor/512x512/apps/fresence.png"
     install -Dm644 fresence.desktop "$pkgdir/usr/share/applications/fresence.desktop"
     install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+    install -Dm644 "fresence-third-party-notices-$pkgver.txt" "$pkgdir/usr/share/licenses/$pkgname/third-party-notices.txt"
 }

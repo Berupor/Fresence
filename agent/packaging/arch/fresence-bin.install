@@ -5,31 +5,29 @@ _user_home() {
 _hint_old_install() {
     local home
     home=$(_user_home)
-    [[ -n $home && -e $home/.config/systemd/user/fresence.service ]] || return 0
+    [[ -n $home && -e $home/.local/share/fresence/desktop ]] || return 0
     cat <<'EOF'
-==> An install.sh setup is still in your home and overrides this package.
+==> An install.sh copy of Fresence is still in your home and its menu entry overrides this package.
     Remove it as your user, keeping your account and data:
-      systemctl --user disable --now fresence
-      rm -f ~/.config/systemd/user/fresence.service ~/.local/bin/fresence ~/.local/bin/fresence-desktop
-      rm -f ~/.local/share/applications/fresence.desktop ~/.local/share/fresence/fresence-third-party-notices.txt
+      rm -f ~/.local/bin/fresence-desktop ~/.local/share/applications/fresence.desktop
+      rm -f ~/.local/share/fresence/fresence-third-party-notices.txt
       rm -rf ~/.local/share/fresence/desktop
-      systemctl --user daemon-reload
+EOF
+}
+
+_hint_start() {
+    cat <<'EOF'
+==> Start Fresence from the menu or with fresence-desktop.
+    An account from the old fresence agent moves over by itself on the first start.
 EOF
 }
 
 post_install() {
     _hint_old_install
-    cat <<'EOF'
-==> Start the agent as your user:
-      systemctl --user enable --now fresence
-    then one of:
-      fresence join <invite>        first device, by an invite
-      fresence link <offer>         accept an offer shown by your linked device
-      fresence link --server <url>  show an offer to scan from your linked device
-EOF
+    _hint_start
 }
 
 post_upgrade() {
     _hint_old_install
-    echo "==> Restart the agent to run the new version: systemctl --user restart fresence"
+    _hint_start
 }
