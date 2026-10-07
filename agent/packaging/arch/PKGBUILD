@@ -1,5 +1,5 @@
 pkgname=fresence-bin
-pkgver=0.17.0
+pkgver=0.18.0
 pkgrel=1
 pkgdesc="Presence for a few friends: who is online, what is open, what is playing"
 arch=(x86_64)
@@ -15,7 +15,7 @@ install=fresence-bin.install
 options=(!strip !debug)
 _release="$url/releases/download/v$pkgver"
 
-_sha_desktop_amd64=435c60e2919889f4c6dfe6c70df41e0411ce1bef4a51a8d05ef288f3c084ad83
+_sha_desktop_amd64=10cb18a068800c92633c2a652dda13450fd309160d46c932743ce0a1cb4b540b
 _sha_notices=5a5166a8c800aa6c888cc4c0d8e23aa9a86712d8637896b1426caeb4a17f6f0b
 _sha_license=16ce71ca3247c82fbbe61448526f55e6f67f95464ca2190ca69da4e157dd7b0b
 _sha_desktop_entry=5e74d9a3b7bb0a69ef2e16afa3f3c9155d304bfef1fb33edc9ced2e68d154c9d
