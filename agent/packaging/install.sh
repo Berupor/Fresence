@@ -7,7 +7,6 @@ DATA_DIR="${XDG_DATA_HOME:-$HOME/.local/share}"
 DESKTOP_DIR="$DATA_DIR/fresence/desktop"
 LAUNCHER="$INSTALL_DIR/fresence-desktop"
 MENU_ENTRY="$DATA_DIR/applications/fresence.desktop"
-# Keep in agreement with goAgentUnit and goAgentBinary in app/desktopApp/.../DesktopUpdate.kt.
 OLD_AGENT_UNIT="${XDG_CONFIG_HOME:-$HOME/.config}/systemd/user/fresence.service"
 OLD_AGENT_BINARY="$INSTALL_DIR/fresence"
 RELEASES="https://github.com/${REPO}/releases"
